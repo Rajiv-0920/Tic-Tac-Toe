@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./CSS/style.css" />
+    <script src="./JS/script.js" defer></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="./CSS/basicStyle.css" />
+    <title>Tic Tac Toe</title>
+  </head>
+  <body>
+    <main class="container">
+      <!-- <div class="mark">◯✕</div> -->
+
+      <strong class="title"
+        >Tic Tac Toe <i class="fa-sharp fa-regular fa-circle o"></i>
+        <i class="fa-solid fa-x x"></i
+      ></strong>
+      <section class="choose-section">
+        <strong class="choose-title">PICK PLAYER 1'S MARK </strong>
+        <div class="choose">
+          <div class="user-choose"></div>
+          <div class="X choice" data-choice="x">
+            <i class="fa-solid fa-x x"></i>
+          </div>
+          <div class="O choice" data-choice="circle">
+            <i class="fa-sharp fa-regular fa-circle o"></i>
+            <!-- <i class="fa-solid fa-circle"></i> -->
+          </div>
+        </div>
+        <p class="remember">REMEMBER: X GOES FIRST</p>
+      </section>
+      <section class="actions">
+        <button class="btn" data-play="vsCpu">New Game (vs Cpu)</button>
+        <button class="btn" data-play="vsPlayer">New Game (vs player)</button>
+      </section>
+    </main>
+    <div class="loading-animation">
+      <div id="loading" class=""></div>
+      <div class="icon">
+        <i class="fa-sharp fa-regular fa-circle o"></i>
+        <i class="fa-solid fa-x x"></i>
+      </div>
+    </div>
+  </body>
+</html>

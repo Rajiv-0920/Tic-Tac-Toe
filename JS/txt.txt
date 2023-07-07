@@ -1,0 +1,152 @@
+const showTurn = document.querySelector(".show-turn");
+const showBgIcon = document.querySelector(".outer.turn");
+const container = document.querySelector(".container");
+const winState = document.querySelector(".winning-state");
+
+const x = `<i class="fa-solid fa-x x"></i>`;
+const o = `<i class="fa-sharp fa-regular fa-circle o"></i>`;
+const player1 = document.querySelector(".score-player1");
+const player2 = document.querySelector(".score-player2");
+const tie = document.querySelector(".ties");
+let countScore1 = 0;
+let countScore2 = 0;
+let countTie = 0;
+window.addEventListener("DOMContentLoaded", () => {
+  var userChoose = JSON.parse(localStorage.getItem("userChoose"));
+  if (userChoose === "x") {
+    board.classList.add("x");
+    showTurn.dataset.move = "x";
+    showTurn.innerHTML = `${x} <span>Turn</span>`;
+    showBgIcon.innerHTML = `${x}`;
+  } else {
+    board.classList.add("o");
+    showTurn.dataset.move = "o";
+    showTurn.innerHTML = `${o} <span>Turn</span>`;
+    showBgIcon.innerHTML = `${o}`;
+  }
+  playGame();
+});
+
+const board = document.getElementById("board");
+const gridItems = document.querySelectorAll(".grid-item");
+
+function playGame() {
+  gridItems.forEach((item) => {
+    item.addEventListener(
+      "click",
+      () => {
+        startGame(item);
+      },
+      { once: true }
+    );
+  });
+}
+
+function startGame(item) {
+  if (winner() !== "win") {
+    board.classList.remove("o");
+    board.classList.remove("x");
+    if (showTurn.dataset.move === "x") {
+      item.innerHTML = x;
+      item.classList.add("x");
+      board.classList.add("o");
+      showTurn.dataset.move = "o";
+      showTurn.innerHTML = `${o} <span>Turn</span>`;
+    } else {
+      item.innerHTML = o;
+      item.classList.add("o");
+      board.classList.add("x");
+      showTurn.dataset.move = "x";
+      showTurn.innerHTML = `${x} <span>Turn</span>`;
+    }
+  }
+  winner();
+}
+
+function winner() {
+  const winChances = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6],
+  ];
+  var i = Array.from(gridItems);
+  var isWin = "";
+  let check = false;
+  var currentMove;
+  winChances.forEach((e) => {
+    if (
+      i[e[0]].classList[1] === i[e[1]].classList[1] &&
+      i[e[1]].classList[1] === i[e[2]].classList[1] &&
+      i[e[0]].classList[1] !== undefined
+    ) {
+      isWin = "win";
+      currentMove = i[e[0]].classList[1];
+      i[e[0]].classList.add("win");
+      i[e[1]].classList.add("win");
+      i[e[2]].classList.add("win");
+      check = false;
+    } else if (isWin === "") {
+      check = i.every((a) => {
+        return a.classList.contains("o") || a.classList.contains("x");
+      });
+    }
+  });
+  showResult(check, isWin, currentMove);
+  return isWin;
+}
+
+function showResult(checkDraw, isWin, currentMove) {
+  if (checkDraw) {
+    countTie++;
+    tie.innerHTML = countTie;
+    setTimeout(() => {
+      container.classList.add("blur");
+      winState.classList.add("show");
+      winState.innerHTML = `
+      <div>MATCH DRAW!</div>
+      <div class="winner">
+      MATCH HAS BEEN DRAW
+      </div>
+      <div class="next-action">
+      <button class="btn" id="quit">QUIT</button
+      ><button class="btn" id="next-round">next round</button>
+      </div>
+      `;
+    }, 2000);
+  }
+  if (isWin === "win") {
+    const winnerChoice = document.querySelector(".winner-choice");
+    if (currentMove === "x") {
+      countScore2++;
+      winnerChoice.innerHTML = x;
+    } else {
+      countScore1++;
+      winnerChoice.innerHTML = o;
+    }
+    setTimeout(() => {
+      container.classList.add("blur");
+      winState.classList.add("show");
+    }, 2000);
+  }
+  setTimeout(() => {
+    const nextRoundBtn = document.getElementById("next-round");
+    nextRoundBtn.addEventListener("click", () => {
+      container.classList.remove("blur");
+      winState.classList.remove("show");
+      gridItems.forEach((item) => {
+        item.classList.remove("x");
+        item.classList.remove("o");
+        item.classList.remove("win");
+        item.innerHTML = "";
+      });
+      player1.innerHTML = countScore1;
+      player2.innerHTML = countScore2;
+    });
+    playGame();
+  }, 2001);
+}

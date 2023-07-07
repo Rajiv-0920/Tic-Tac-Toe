@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./CSS/ticTacToe.css" />
+    <link rel="stylesheet" href="./CSS/basicStyle.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <script src="JS/playerVsPlayer.js" defer></script>
+    <title>Player Vs Player</title>
+  </head>
+  <body>
+    <main class="container">
+      <i class="fa-sharp fa-regular fa-circle o outer-o"></i
+      ><i class="fa-solid fa-x x outer-x"></i>
+      <div class="outer turn">
+        <i class="fa-sharp fa-regular fa-circle o"></i>
+      </div>
+
+      <header>
+        <div class="mark">
+          <i class="fa-sharp fa-regular fa-circle o"></i
+          ><i class="fa-solid fa-x x"></i>
+        </div>
+        <div class="show-turn"></div>
+        <button class="btn" id="restart">
+          <i class="fa-solid fa-arrow-rotate-right"></i>
+        </button>
+      </header>
+      <section class="tic-tac-toe" id="board">
+        <div class="grid-item"></div>
+        <div class="grid-item"></div>
+        <div class="grid-item"></div>
+        <div class="grid-item"></div>
+        <div class="grid-item"></div>
+        <div class="grid-item"></div>
+        <div class="grid-item"></div>
+        <div class="grid-item"></div>
+        <div class="grid-item"></div>
+      </section>
+      <section class="result">
+        <div class="your-score">
+          <p class="text"><i class="fa-solid fa-x x"></i> (Player 1)</p>
+          <p class="score score-player1">0</p>
+        </div>
+        <div class="total-ties">
+          <p class="text">Ties</p>
+          <p class="score ties">0</p>
+        </div>
+        <div class="cpu-score">
+          <p class="text">
+            <i class="fa-sharp fa-regular fa-circle o"></i>
+            (Player 2)
+          </p>
+          <p class="score score-player2">0</p>
+        </div>
+      </section>
+    </main>
+    <section class="winning-state">
+      <div class="player">YOU WON!</div>
+      <div class="winner">
+        <span class="winner-choice"
+          ><i class="fa-sharp fa-regular fa-circle o"></i></span
+        >TAKES THE ROUND
+      </div>
+      <div class="next-action">
+        <button class="btn" id="quit">QUIT</button
+        ><button class="btn" id="next-round">next round</button>
+      </div>
+    </section>
+    <div class="loading-animation">
+      <div id="loading" class=""></div>
+      <div class="icon">
+        <i class="fa-sharp fa-regular fa-circle o"></i>
+        <i class="fa-solid fa-x x"></i>
+      </div>
+    </div>
+  </body>
+</html>
